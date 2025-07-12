@@ -44,8 +44,17 @@ export default function LyricsAssistant() {
 
   const runAll = async () => {
     if (!lyrics.trim()) return;
-    if (!mood.trim()) return;
-    if (genre.length==0) return;
+    let moodContentToAi = "";
+    let genreContentToAi = "";
+    let evalMetrics = "rhyme & meter, imagery, and authenticity & emotion"
+    if (genre.length!=0) {
+      genreContentToAi=`The intended genre(s) is ${genre.join(", ")}`
+      evalMetrics = "suitability to genre, " + evalMetrics;
+    };
+    if (mood.trim()) {
+      moodContentToAi=`The intended mood or theme is ${mood.trim()}`
+      evalMetrics = "clarity of mood, " + evalMetrics;
+    };
     if (!API_KEY) {
       alert("🚨 Missing API key! Set VITE_NEBIUS_API_KEY");
       return;
@@ -68,7 +77,7 @@ export default function LyricsAssistant() {
           messages: [
             {
               role: "system",
-              content: `You are a songwriting coach. The intended mood is ${mood.trim()}. The intended genre(s) is ${genre.join(", ")}. Evaluate these lyrics for clarity of mood, rhyme & meter, imagery, authenticity & emotion, and suitability to genre and suggest 3 concrete next steps. Then append a one-sentence prompt for an album-cover image based on this song. --- ${lyrics.trim()}`
+              content: `You are a songwriting coach. ${moodContentToAi}. ${genreContentToAi}. Evaluate these lyrics for ${evalMetrics} and suggest 3 concrete next steps. Then append a one-sentence prompt for an album-cover image based on this song. --- ${lyrics.trim()}`
             }
           ]
         })
@@ -161,6 +170,7 @@ export default function LyricsAssistant() {
 
               <TextField
                 label="Paste your lyrics"
+                required
                 multiline
                 rows={5}
                 fullWidth

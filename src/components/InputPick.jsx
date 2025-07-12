@@ -7,7 +7,7 @@ import {
 
 const filter = createFilterOptions();
 
-export default function InputPick({options,selected,setValue, labelText}){
+export default function InputPick({options,selected,setValue, labelText, isRequired=false}){
     const optionsObj = options.map((option)=> ({title: option}))
 
     return (
@@ -72,6 +72,7 @@ export default function InputPick({options,selected,setValue, labelText}){
             {...params}
             label={labelText}
             placeholder=""
+            required={isRequired}
             sx={{
                 input: {
                     color:'white',

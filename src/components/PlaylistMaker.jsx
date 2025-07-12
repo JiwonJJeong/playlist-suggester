@@ -68,6 +68,7 @@ export default function PlaylistMaker() {
   const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
   const generatePlaylists = async () => {
+
     if (!API_KEY) {
       alert("Missing OpenAI API key in .env");
       return;
@@ -81,10 +82,10 @@ export default function PlaylistMaker() {
     const genresText = selectedGenre.join(", ");
     const decadesText = selectedDecades.join(", ");
     const prompt = `
-User likes the following songs: ${songsText}
-Their favorite singers include: ${singersText}
-Their favorite genres include: ${genresText}
-Their favorite decades of music include: ${decadesText}
+${songsText !== "" ? "Their favorite songs include " + songsText: ""}
+${singersText !=="" ? "Their favorite singers include " + singersText: ""}
+${genresText !=="" ? "Their favorite genres include " + genresText: ""}
+${decadesText !=="" ? "Their favorite decades include " + decadesText: ""}
 Suggest 3 playlists. Each should include:
 - A catchy name
 - A short description
@@ -163,7 +164,8 @@ Suggest 3 playlists. Each should include:
             <Button
               onClick={generatePlaylists}
               variant="contained"
-              disabled={loading || selectedSongs.length === 0 || selectedSingers.length === 0}
+              disabled={loading || (selectedSongs.length ==0 && selectedSingers.length ==0
+                && selectedGenre.length ==0 && selectedDecades.length ==0)}
               startIcon={loading && <CircularProgress size={20} />}
               sx={{
                 py: 1.5,
