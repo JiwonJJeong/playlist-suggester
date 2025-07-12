@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 
+// selectedInputsRef.current is an array of strings "90s" "Beyonce" "pop" that needs to be turned into a playlist
 export default function PlaylistPlayer ({selectedInputsRef}){
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
