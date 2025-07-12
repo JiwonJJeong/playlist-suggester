@@ -1,34 +1,62 @@
-import PlaylistMaker from "./PlaylistMaker.jsx"
-import PlaylistPlayer from  "./PlaylistPlayer.jsx"
-import '../styles/App.css'
-import {useRef, useState} from "react";
-
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import PlaylistMaker from "./PlaylistMaker.jsx";
+import PlaylistPlayer from "./PlaylistPlayer.jsx";
+import LyricsAssistant from "./LyricsAssistant.jsx";
+import '../styles/App.css';
+import { useRef, useState } from "react";
 
 function App() {
-  // Stores an array of input strings like ["90s","Beyonce"]
-  // later maybe separate strings by type (decade, artist, genre)
   const selectedInputsRef = useRef([]);
   const [isFinalized, setFinalized] = useState(false);
+  const [diskStrings, setDiskStrings] = useState(["90s", "Pop", "Classical", "Beyonce", "2000s"]);
+  const location = useLocation();
 
-  function addSelectedInput(input){
+  function addSelectedInput(input) {
     selectedInputsRef.current = [...selectedInputsRef.current, input];
-    setDiskStrings(diskStrings.filter((string)=> string!=input));
-    // transition to show animation should go here
+    setDiskStrings(diskStrings.filter((string) => string !== input));
     console.log(selectedInputsRef);
   }
-  // consider adding way to remove an input?
-
-  const [diskStrings, setDiskStrings] = useState(["90s", "Pop", "Classical", "Beyonce", "2000s"])
 
   return (
-    <>
-      {(!isFinalized) ? 
-      <PlaylistMaker diskStrings={diskStrings} addSelectedInput={addSelectedInput} setFinalized={setFinalized}></PlaylistMaker>
-      :
-      <PlaylistPlayer selectedInputsRef={selectedInputsRef} />
-      }
-    </>
-  )
+    <div className="app-container">
+      <nav className="nav-container">
+        <div className="nav-content">
+          <Link 
+            to="/" 
+            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+          >
+            🎵 Playlist Recommendation
+          </Link>
+          <Link 
+            to="/validate" 
+            className={`nav-link ${location.pathname === '/validate' ? 'active' : ''}`}
+          >
+            ✨ Validate Your Music
+          </Link>
+        </div>
+      </nav>
+
+      <main className="main-content">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              !isFinalized ? (
+                <PlaylistMaker
+                  diskStrings={diskStrings}
+                  addSelectedInput={addSelectedInput}
+                  setFinalized={setFinalized}
+                />
+              ) : (
+                <PlaylistPlayer selectedInputsRef={selectedInputsRef} />
+              )
+            }
+          />
+          <Route path="/validate" element={<LyricsAssistant />} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,12 +1,96 @@
-# React + Vite
+# 🎵 Music Genie
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React-based web application that uses OpenAI to generate personalized music playlists based on users' favorite **songs** and **singers**. It leverages Material UI (MUI) for sleek UI components and uses OpenAI's GPT model to generate themed playlists.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+* Select favorite **songs** and **singers** from dropdowns
+* Generate **3 personalized playlists** with catchy names, descriptions, and songs
+* Songs are **linked to YouTube** for quick listening
+* Enter the music verses **you** have written, to receive feedback + images that you can use for your album cover!
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛌 Tech Stack
+
+| Feature                       | Technology Used                     |
+| ----------------------------- | ----------------------------------- |
+| Frontend Framework            | React.js                            |
+| UI Components                 | MUI (Material UI)                   |
+| AI Playlist Generation        | OpenAI GPT (gpt-3.5-turbo / gpt-4o) |
+| AI Feedback Generation        | DeepSeek-V3 model                   |
+| AI Album Image Generation     | Stability-ai sdxl model             |
+| Usage of LLMs                 | Nebius Studio for access of LLMs    |
+
+---
+
+## 🔧 Setup Instructions
+
+1. **Clone the repo**
+
+```bash
+ git clone https://github.com/JiwonJJeong/playlist-suggester.git
+ cd playlist-suggester
+```
+
+2. **Install dependencies**
+
+```bash
+ npm install
+```
+
+3. **Add your OpenAI API key**
+   Create a `.env` file in the root:
+
+```env
+VITE_NEBIUS_API_KEY=your_key
+VITE_OPENAI_API_KEY=your_key
+```
+
+4. **Run locally**
+
+```bash
+ npm run dev
+```
+
+App runs at: `http://localhost:5173`
+
+---
+
+## ✨ Future Improvements
+
+* Chance to upload your music performance audios/videos and we'll analyze to provide improvements + generate variations of music/song/audio you can use to produce your new songs
+* Spotify API integration
+* Save playlists to user profile (backend)
+* Export playlists as PDF or text
+* Share via link or QR
+* Input your written verse, and receive a quick 4-5 second short audio on how your music song could start (by using HuggingFace Audio Models)
+
+---
+
+## 📝 License
+
+MIT License
+
+
+### Some verses to test
+Falling stars and midnight skies,<br>
+You whispered truth behind the lies.<br>
+The silence screamed when you let go,<br>
+Now I dance with your shadow.
+
+--- 
+
+City lights flicker on my skin,<br>
+Running wild where dreams begin.<br>
+Radio static, a voice unknown,<br>
+I built my world with broken tones.
+
+---
+
+Wake me up with your neon glow,<br>
+Heartbeat syncing to the show.<br>
+Every step we take, electric fire,<br>
+You're the spark, my one desire.

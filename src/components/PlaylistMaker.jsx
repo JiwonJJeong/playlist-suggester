@@ -1,17 +1,320 @@
-import Disk from "./Disk.jsx"
-import DiskReceiver from "./DiskReceiver.jsx"
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Typography,
+  CircularProgress,
+  Paper,
+  Divider,
+  Autocomplete,
+  TextField,
+  Container,
+  alpha,
+} from "@mui/material";
 
-export default function PlayerlistMaker({diskStrings,addSelectedInput,setFinalized}){
+const songOptions = [
+  "Blinding Lights",
+  "Perfect",
+  "Shape of You",
+  "Let Her Go",
+  "Tum Hi Ho",
+  "Bad Guy",
+  "Photograph",
+  "Counting Stars",
+  "Levitating",
+  "Kesariya",
+];
 
-    return (
-        <>
-        {diskStrings.map((string) => {
-            return <Disk key={string} inputText={string}></Disk>
-          })}
-          <DiskReceiver addSelectedInput={addSelectedInput} />
-          <button onClick={()=>setFinalized(true)} >Let's make the playlist!</button>
-          </>
-    )
+const singerOptions = [
+  "Taylor Swift",
+  "The Weeknd",
+  "Arijit Singh",
+  "Billie Eilish",
+  "Drake",
+  "Ed Sheeran",
+  "Shreya Ghoshal",
+  "Doja Cat",
+  "Adele",
+  "Coldplay",
+];
+
+export default function PlaylistMaker() {
+  const [selectedSongs, setSelectedSongs] = useState([]);
+  const [selectedSingers, setSelectedSingers] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+
+  const generatePlaylists = async () => {
+    if (!API_KEY) {
+      alert("Missing OpenAI API key in .env");
+      return;
+    }
+
+    setLoading(true);
+    setPlaylists([]);
+
+    const songsText = selectedSongs.join(", ");
+    const singersText = selectedSingers.join(", ");
+    const prompt = `
+User likes the following songs: ${songsText}
+Their favorite singers include: ${singersText}
+Suggest 3 playlists. Each should include:
+- A catchy name
+- A short description
+- A list of 5 songs that fit the theme and vibe.
+`;
+
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are a music recommendation AI that generates themed playlists based on songs and favorite singers.",
+            },
+            { role: "user", content: prompt },
+          ],
+          temperature: 0.7,
+        }),
+      });
+
+      if (res.status === 401) throw new Error("401 Unauthorized – check your OpenAI API key");
+      const data = await res.json();
+      const text = data.choices?.[0]?.message?.content || "";
+      const chunks = text.split(/(?=Playlist|\u{1F3B5}|\u{1F389})/u);
+      setPlaylists(chunks);
+    } catch (err) {
+      console.error("❌ Playlist generation failed:", err);
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)",
+        py: 6,
+      }}
+    >
+      <Container maxWidth="md">
+        <Paper
+          elevation={24}
+          sx={{
+            p: 4,
+            borderRadius: "24px",
+            background: "rgba(30, 27, 75, 0.8)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          <Typography
+            variant="h3"
+            gutterBottom
+            align="center"
+            sx={{
+              color: "#fff",
+              fontWeight: 700,
+              background: "linear-gradient(90deg, #6366f1 0%, #ec4899 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              mb: 4,
+            }}
+          >
+            🎵 Playlist Generator
+          </Typography>
+
+          <Autocomplete
+            multiple
+            options={songOptions}
+            value={selectedSongs}
+            onChange={(_, value) => setSelectedSongs(value)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Favorite Songs"
+                placeholder="Select songs"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: alpha("#1e1b4b", 0.4),
+                    "& fieldset": {
+                      borderColor: "rgba(255, 255, 255, 0.2)",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#6366f1",
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "rgba(255, 255, 255, 0.7)",
+                  },
+                  "& .MuiChip-root": {
+                    backgroundColor: "#6366f1",
+                    color: "white",
+                  },
+                }}
+              />
+            )}
+            sx={{ mb: 3 }}
+          />
+
+          <Autocomplete
+            multiple
+            options={singerOptions}
+            value={selectedSingers}
+            onChange={(_, value) => setSelectedSingers(value)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Favorite Singers"
+                placeholder="Select singers"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: alpha("#1e1b4b", 0.4),
+                    "& fieldset": {
+                      borderColor: "rgba(255, 255, 255, 0.2)",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#6366f1",
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "rgba(255, 255, 255, 0.7)",
+                  },
+                  "& .MuiChip-root": {
+                    backgroundColor: "#6366f1",
+                    color: "white",
+                  },
+                }}
+              />
+            )}
+            sx={{ mb: 4 }}
+          />
+
+          <Box sx={{ textAlign: "center", mb: 5 }}>
+            <Button
+              onClick={generatePlaylists}
+              variant="contained"
+              disabled={loading || selectedSongs.length === 0 || selectedSingers.length === 0}
+              startIcon={loading && <CircularProgress size={20} />}
+              sx={{
+                py: 1.5,
+                px: 6,
+                fontSize: "1.1rem",
+                background: "linear-gradient(90deg, #6366f1 0%, #ec4899 100%)",
+                borderRadius: "12px",
+                textTransform: "none",
+                fontWeight: 600,
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 8px 20px rgba(99, 102, 241, 0.3)",
+                },
+              }}
+            >
+              {loading ? "Creating Magic..." : "Generate Playlists ✨"}
+            </Button>
+          </Box>
+
+          {playlists.length > 0 && (
+            <Box mt={4}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{
+                  color: "#fff",
+                  fontWeight: 600,
+                  textAlign: "center",
+                  mb: 3,
+                }}
+              >
+                🎧 Your Custom Playlists
+              </Typography>
+              {playlists.map((chunk, idx) => (
+                <Paper
+                  key={idx}
+                  sx={{
+                    p: 3,
+                    mb: 3,
+                    borderRadius: "16px",
+                    backgroundColor: "rgba(15, 23, 42, 0.6)",
+                    backdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    transition: "transform 0.3s ease",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                    },
+                  }}
+                >
+                  {chunk.split("\n").map((line, i) => {
+                    const match = line.match(/^\d+\.\s(.+)/);
+                    if (match) {
+                      const song = match[1].trim();
+                      const encoded = encodeURIComponent(song);
+                      const url = `https://www.youtube.com/results?search_query=${encoded}`;
+                      return (
+                        <Typography
+                          key={i}
+                          sx={{
+                            pl: 2,
+                            color: "rgba(255, 255, 255, 0.9)",
+                            py: 0.5,
+                          }}
+                        >
+                          {line.split(".")[0]}.{" "}
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              color: "#6366f1",
+                              textDecoration: "none",
+                              transition: "color 0.2s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.target.style.color = "#ec4899";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.color = "#6366f1";
+                            }}
+                          >
+                            {song}
+                          </a>
+                        </Typography>
+                      );
+                    }
+                    return (
+                      <Typography
+                        key={i}
+                        sx={{
+                          color: "rgba(255, 255, 255, 0.9)",
+                          fontWeight: i === 0 ? 600 : 400,
+                          fontSize: i === 0 ? "1.2rem" : "1rem",
+                          mb: 1,
+                        }}
+                      >
+                        {line}
+                      </Typography>
+                    );
+                  })}
+                  <Divider sx={{ mt: 2, opacity: 0.2 }} />
+                </Paper>
+              ))}
+            </Box>
+          )}
+        </Paper>
+      </Container>
+    </Box>
+  );
 }
-
-
