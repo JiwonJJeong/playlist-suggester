@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputPick from "./InputPick.jsx"
 import {
   Box,
   Button,
@@ -38,9 +39,29 @@ const singerOptions = [
   "Coldplay",
 ];
 
+const genreOptions = [
+  "Pop",
+  "Rock",
+  "Hip Hop",
+  "R&B",
+  "Electronic"
+];
+
+const decadeOptions = [
+  "1960s",
+  "1970s",
+  "1980s",
+  "1990s",
+  "2000s",
+  "2010s",
+  "2020s",
+]
+
 export default function PlaylistMaker() {
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [selectedSingers, setSelectedSingers] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState([]);
+  const [selectedDecades, setSelectedDecades] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -57,9 +78,13 @@ export default function PlaylistMaker() {
 
     const songsText = selectedSongs.join(", ");
     const singersText = selectedSingers.join(", ");
+    const genresText = selectedGenre.join(", ");
+    const decadesText = selectedDecades.join(", ");
     const prompt = `
 User likes the following songs: ${songsText}
 Their favorite singers include: ${singersText}
+Their favorite genres include: ${genresText}
+Their favorite decades of music include: ${decadesText}
 Suggest 3 playlists. Each should include:
 - A catchy name
 - A short description
@@ -136,71 +161,10 @@ Suggest 3 playlists. Each should include:
             🎵 Playlist Generator
           </Typography>
 
-          <Autocomplete
-            multiple
-            options={songOptions}
-            value={selectedSongs}
-            onChange={(_, value) => setSelectedSongs(value)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Favorite Songs"
-                placeholder="Select songs"
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: alpha("#1e1b4b", 0.4),
-                    "& fieldset": {
-                      borderColor: "rgba(255, 255, 255, 0.2)",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "#6366f1",
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "rgba(255, 255, 255, 0.7)",
-                  },
-                  "& .MuiChip-root": {
-                    backgroundColor: "#6366f1",
-                    color: "white",
-                  },
-                }}
-              />
-            )}
-            sx={{ mb: 3 }}
-          />
-
-          <Autocomplete
-            multiple
-            options={singerOptions}
-            value={selectedSingers}
-            onChange={(_, value) => setSelectedSingers(value)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Favorite Singers"
-                placeholder="Select singers"
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: alpha("#1e1b4b", 0.4),
-                    "& fieldset": {
-                      borderColor: "rgba(255, 255, 255, 0.2)",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "#6366f1",
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "rgba(255, 255, 255, 0.7)",
-                  },
-                  "& .MuiChip-root": {
-                    backgroundColor: "#6366f1",
-                    color: "white",
-                  },
-                }}
-              />
-            )}
-            sx={{ mb: 4 }}
-          />
+          <InputPick typeOfSelected="Song" options={songOptions} value={selectedSongs} setValue={setSelectedSongs}/>
+          <InputPick typeOfSelected="Singer" options={singerOptions} value={selectedSingers} setValue={setSelectedSingers}/>
+          <InputPick typeOfSelected="Genre" options={genreOptions} value={selectedGenre} setValue={setSelectedGenre}/>
+          <InputPick typeOfSelected="Decade" options={decadeOptions} value={selectedDecades} setValue={setSelectedDecades}/>
 
           <Box sx={{ textAlign: "center", mb: 5 }}>
             <Button
