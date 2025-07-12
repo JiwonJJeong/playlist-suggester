@@ -1,9 +1,9 @@
 import "../styles/DiskReceiver.css"
 
-export default function DiskReceiver(){
+export default function DiskReceiver({addSelectedInput}){
     function handleDrop(e){
         const data = e.dataTransfer.getData("text/plain");
-        console.log(data);
+        addSelectedInput(data);
         e.preventDefault();
       }
 

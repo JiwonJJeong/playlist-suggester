@@ -7,7 +7,7 @@ export default function Disk({inputText}){
 
     return (
         <figure draggable="true" onDragStart={handleDragStart} className="disk">
-            <img>
+            <img >
             </img>
             <figcaption>{inputText}</figcaption>
         </figure>
