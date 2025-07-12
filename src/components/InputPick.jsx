@@ -37,14 +37,14 @@ export default function InputPick({options,selected,setValue, labelText}){
                   borderColor: "rgba(255, 255, 255, 0.2)",
                 },
                 "&:hover fieldset": {
-                  borderColor: "#6366f1",
+                  borderColor: "#8e54e9",
                 },
               },
               "& .MuiInputLabel-root": {
                 color: "rgba(255, 255, 255, 0.7)",
               },
               "& .MuiChip-root": {
-                backgroundColor: "#6366f1",
+                backgroundColor: "#8e54e9",
                 color: "white",
               },
             }}

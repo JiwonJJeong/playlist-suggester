@@ -144,24 +144,15 @@ export default function LyricsAssistant() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        className="lyrics-container"
-        sx={{
-          minHeight: "100vh",
-          background: "linear-gradient(135deg, #181824 0%, #23243a 100%)",
-          py: 6,
-          color: "#e0e0e0",
-        }}
-      >
         <Container maxWidth="md">
           <Paper
             elevation={8}
             sx={{
               p: 4,
-              borderRadius: 4,
-              background: "rgba(30, 32, 48, 0.95)",
-              boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-              backdropFilter: "blur(6px)",
+              borderRadius: "24px",
+              background: "rgba(30, 27, 75, 0.8)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
             }}
           >
             <Typography
@@ -191,8 +182,9 @@ export default function LyricsAssistant() {
                 onChange={(e) => setLyrics(e.target.value)}
                 sx={{
                   my: 3,
+                  margin: "0px",
                   "& .MuiInputBase-root": {
-                    background: "#23243a",
+                    background: "rgba(30, 27, 75, 0.8)",
                     color: "#e0e0e0",
                     borderRadius: 2,
                     fontFamily: 'inherit',
@@ -239,12 +231,12 @@ export default function LyricsAssistant() {
                 multiline
                 rows={2}
                 fullWidth
-                value={lyrics}
+                value={mood}
                 onChange={(e) => setMood(e.target.value)}
                 sx={{
                   my: 3,
                   "& .MuiInputBase-root": {
-                    background: "#23243a",
+                    background: "rgba(30, 27, 75, 0.8)",
                     color: "#e0e0e0",
                     borderRadius: 2,
                     fontFamily: 'inherit',
@@ -377,7 +369,6 @@ export default function LyricsAssistant() {
             )}
           </Paper>
         </Container>
-      </Box>
     </ThemeProvider>
   );
 }
