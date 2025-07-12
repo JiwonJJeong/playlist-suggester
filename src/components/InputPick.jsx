@@ -5,7 +5,8 @@ import {
 } from "@mui/material";
 
 
-export default function InputPick({options,selected,setValue, typeOfSelected}){
+export default function InputPick({options,selected,setValue, labelText}){
+    
 
     return (
         <Autocomplete
@@ -21,8 +22,8 @@ export default function InputPick({options,selected,setValue, typeOfSelected}){
         renderInput={(params) => (
           <TextField
             {...params}
-            label={"Favorite " + typeOfSelected}
-            placeholder={"Select "+ typeOfSelected}
+            label={labelText}
+            placeholder=""
             sx={{
                 input: {
                     color:'white',

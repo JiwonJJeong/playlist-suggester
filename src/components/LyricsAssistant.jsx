@@ -23,6 +23,15 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DownloadIcon from '@mui/icons-material/Download';
 import '../styles/LyricsAssistant.css';
+import InputPick from "./InputPick";
+
+const genreOptions = [
+  "Pop",
+  "Rock",
+  "Hip Hop",
+  "R&B",
+  "Electronic"
+];
 
 const theme = createTheme({
   palette: {
@@ -37,6 +46,8 @@ const theme = createTheme({
 
 export default function LyricsAssistant() {
   const [lyrics, setLyrics] = useState("");
+  const [mood, setMood] = useState("");
+  const [genre, setGenre] = useState([])
   const [feedback, setFeedback] = useState("");
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -46,6 +57,8 @@ export default function LyricsAssistant() {
 
   const runAll = async () => {
     if (!lyrics.trim()) return;
+    if (!mood.trim()) return;
+    if (genre.length==0) return;
     if (!API_KEY) {
       alert("🚨 Missing API key! Set VITE_NEBIUS_API_KEY");
       return;
@@ -68,7 +81,7 @@ export default function LyricsAssistant() {
           messages: [
             {
               role: "system",
-              content: `You are a songwriting coach. Evaluate these lyrics for emotional impact, rhyme/meter, imagery, and suggest 3 concrete next steps. Then append a one-sentence prompt for an album-cover image based on this song. --- ${lyrics.trim()}`
+              content: `You are a songwriting coach. The intended mood is ${mood.trim()}. The intended genre(s) is ${genre.join(", ")}. Evaluate these lyrics for clarity of mood, rhyme & meter, imagery, authenticity & emotion, and suitability to genre and suggest 3 concrete next steps. Then append a one-sentence prompt for an album-cover image based on this song. --- ${lyrics.trim()}`
             }
           ]
         })
@@ -168,7 +181,7 @@ export default function LyricsAssistant() {
               📝 Lyrics Coach <br></br>+ 🎨 Album Art Generator
             </Typography>
 
-            <div className="textarea-wrapper">
+
               <TextField
                 label="Paste your lyrics"
                 multiline
@@ -220,7 +233,61 @@ export default function LyricsAssistant() {
                 }}
                 variant="outlined"
               />
-            </div>
+
+              <TextField
+                label="Describe mood"
+                multiline
+                rows={2}
+                fullWidth
+                value={lyrics}
+                onChange={(e) => setMood(e.target.value)}
+                sx={{
+                  my: 3,
+                  "& .MuiInputBase-root": {
+                    background: "#23243a",
+                    color: "#e0e0e0",
+                    borderRadius: 2,
+                    fontFamily: 'inherit',
+                  },
+                  "& .MuiInputBase-input": {
+                    padding: "16px",
+                    "&::placeholder": {
+                      opacity: 0.7,
+                    },
+                    "&:focus": {
+                      outline: 'none',
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#b0b3c6",
+                    fontSize: "1rem",
+                    "&.Mui-focused": {
+                      color: "#8e54e9",
+                    },
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#44465a",
+                    transition: "border-color 0.2s ease",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#6366f1",
+                    },
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#8e54e9",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Remove default resize handle
+                  "& .MuiInputBase-multiline": {
+                    resize: "none",
+                  },
+                }}
+                variant="outlined"
+              />
+
+              <InputPick labelText="Select Genre" options={genreOptions} value={genre} setValue={setGenre}/>
+
 
             {/* Update the loading state */}
             <Box textAlign="center">
@@ -232,14 +299,17 @@ export default function LyricsAssistant() {
                 disabled={loading || !lyrics.trim()}
                 startIcon={loading && <CircularProgress size={20} />}
                 sx={{
-                  px: 4,
-                  py: 1.2,
-                  fontSize: "1rem",
-                  background: "linear-gradient(90deg, #5f5fff 0%, #8e54e9 100%)",
-                  color: "#fff",
-                  boxShadow: "0 2px 8px #23243a",
+                  py: 1.5,
+                  px: 6,
+                  fontSize: "1.1rem",
+                  background: "linear-gradient(90deg, #6366f1 0%, #ec4899 100%)",
+                  borderRadius: "12px",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  transition: "all 0.3s ease",
                   "&:hover": {
-                    background: "linear-gradient(90deg, #8e54e9 0%, #5f5fff 100%)",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 8px 20px rgba(99, 102, 241, 0.3)",
                   },
                 }}
               >

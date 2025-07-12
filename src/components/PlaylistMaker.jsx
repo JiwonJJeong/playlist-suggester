@@ -161,10 +161,10 @@ Suggest 3 playlists. Each should include:
             🎵 Playlist Generator
           </Typography>
 
-          <InputPick typeOfSelected="Song" options={songOptions} value={selectedSongs} setValue={setSelectedSongs}/>
-          <InputPick typeOfSelected="Singer" options={singerOptions} value={selectedSingers} setValue={setSelectedSingers}/>
-          <InputPick typeOfSelected="Genre" options={genreOptions} value={selectedGenre} setValue={setSelectedGenre}/>
-          <InputPick typeOfSelected="Decade" options={decadeOptions} value={selectedDecades} setValue={setSelectedDecades}/>
+          <InputPick labelText="Favorite Song" options={songOptions} value={selectedSongs} setValue={setSelectedSongs}/>
+          <InputPick labelText="Favorite Singer" options={singerOptions} value={selectedSingers} setValue={setSelectedSingers}/>
+          <InputPick labelText="Favorite Genre" options={genreOptions} value={selectedGenre} setValue={setSelectedGenre}/>
+          <InputPick labelText="Favorite Decade" options={decadeOptions} value={selectedDecades} setValue={setSelectedDecades}/>
 
           <Box sx={{ textAlign: "center", mb: 5 }}>
             <Button
