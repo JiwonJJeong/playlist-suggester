@@ -2,6 +2,7 @@ import { Routes, Route, Link, useLocation } from "react-router-dom";
 import PlaylistMaker from "./PlaylistMaker.jsx";
 import PlaylistPlayer from "./PlaylistPlayer.jsx";
 import LyricsAssistant from "./LyricsAssistant.jsx";
+import LandingPage from  "./LandingPage.jsx"
 import '../styles/App.css';
 import { useRef, useState } from "react";
 
@@ -22,7 +23,7 @@ function App() {
       <nav className="nav-container">
         <div className="nav-content">
           <Link 
-            to="/" 
+            to="/playlist" 
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
           >
             🎵 Find Music
@@ -39,7 +40,7 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route
-            path="/"
+            path="/playlist"
             element={
               !isFinalized ? (
                 <PlaylistMaker
@@ -53,6 +54,7 @@ function App() {
             }
           />
           <Route path="/validate" element={<LyricsAssistant />} />
+          <Route path="/" element={<LandingPage/>} />
         </Routes>
       </main>
     </div>
