@@ -1,0 +1,107 @@
+
+.summary {
+  position: relative;
+  min-height: 2.5em;
+}
+
+/* The wrapper moves the link right */
+.mainTitleWrapper {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+/* Move the wrapper to the right when open */
+.close .mainTitleWrapper {
+  transform: translateX(0);
+}
+.open .mainTitleWrapper {
+  transform: translateX(220px); /* Adjust for your layout */
+}
+
+/* The Link styles */
+.mainTitle {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: white !important;
+  text-decoration: none;
+  padding: 0.25em 0.5em;
+  border-radius: 1.5em;
+  background: transparent;
+  transition: background 0.4s, box-shadow 0.4s;
+  pointer-events: none; /* disables link when closed */
+  opacity: 1;
+}
+
+/* Enable the link and show button background only when open */
+.open .mainTitle {
+  background: linear-gradient(90deg, #e630e6 0%, #1976d2 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 1.5em;
+  padding: 0.25em 0.5em;
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+/* Visually indicate disabled state */
+.close .mainTitle {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Alt title styles */
+.altTitle {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: White;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Only show alt title when open */
+.open .altTitle {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* CSS for accordion detais*/
+.featuresList {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureItem {
+  background: rgba(255,255,255,0.10);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.featureItem:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.featureIcon {
+  margin-right: 0.75rem;
+  font-size: 1.5em;
+  color: #90caf9;
+}
