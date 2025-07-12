@@ -1,9 +1,8 @@
-import { useState } from 'react'
+import DiskReceiver from "./DiskReceiver.jsx"
 import Disk from "./Disk.jsx"
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -12,6 +11,7 @@ function App() {
       <Disk inputText="Beyonce"></Disk>
       <Disk inputText="Pop"></Disk>
       <Disk inputText="90s"></Disk>
+      <DiskReceiver />
     </>
   )
 }
