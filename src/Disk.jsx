@@ -3,9 +3,10 @@
 export default function Disk({inputText}){
 
     return (
-        <div className="disk">
-            <img></img>
-            <caption>{inputText}</caption>
-        </div>
+        <figure className="disk">
+            <img>
+            </img>
+            <figcaption>{inputText}</figcaption>
+        </figure>
     )
 }
