@@ -152,16 +152,20 @@ export default function LyricsAssistant() {
             }}
           >
             <Typography
-              className="lyrics-title"
-              variant="h4"
-              align="center"
-              sx={{
-                color: "#f5f5fa",
-                textShadow: "0 2px 8px #23243a",
-                letterSpacing: 1,
-              }}
-            >
-              📝 Lyrics Coach + 🎨 Album Art Generator
+            variant="h3"
+            gutterBottom
+            align="center"
+            sx={{
+              color: "#fff",
+              fontWeight: 700,
+              background: "linear-gradient(90deg, #6366f1 0%, #ec4899 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              mb: 4,
+            }}
+          >
+              📝 Lyrics Coach <br></br>+ 🎨 Album Art Generator
             </Typography>
 
             <div className="textarea-wrapper">

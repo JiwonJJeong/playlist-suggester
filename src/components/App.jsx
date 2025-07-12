@@ -25,13 +25,13 @@ function App() {
             to="/" 
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
           >
-            🎵 Playlist Recommendation
+            🎵 Find Music
           </Link>
           <Link 
             to="/validate" 
             className={`nav-link ${location.pathname === '/validate' ? 'active' : ''}`}
           >
-            ✨ Validate Your Music
+            ✨ Inspire Music
           </Link>
         </div>
       </nav>
