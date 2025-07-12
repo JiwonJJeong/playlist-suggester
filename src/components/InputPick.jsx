@@ -81,24 +81,25 @@ export default function InputPick({options,selected,setValue, labelText, isRequi
                     }
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#44465a", //good
+                    borderColor: "#44465a",
                     transition: "border-color 0.2s ease",
                   },
                   "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused fieldset": {
-                      borderColor: "#4350E0", 
-                    },
                     "&:hover .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#6366f1",
                     },
                     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#8e54e9", //good
+                      borderColor: "#8e54e9",
                       borderWidth: "2px",
                     },
                   },
               "& .MuiInputLabel-root": {
                 color: "rgba(255, 255, 255, 0.7)",
+                "&.Mui-focused": {
+                    color: "#8e54e9",
+                  },
               },
+
               "& .MuiChip-root": {
                 backgroundColor: "#8e54e9",
                 color: "white",
