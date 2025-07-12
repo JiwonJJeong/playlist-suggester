@@ -11,8 +11,6 @@ import {
   TextField,
   Container,
   alpha,
-  createTheme,
-  ThemeProvider,
 } from "@mui/material";
 
 const songOptions = [
@@ -58,17 +56,6 @@ const decadeOptions = [
   "2010s",
   "2020s",
 ]
-
-const theme = createTheme({
-  palette: {
-    primary: { main: '#556cd6' },
-    secondary: { main: '#19857b' }
-  },
-  typography: {
-    h4: { fontWeight: 600 },
-    h5: { fontWeight: 500 }
-  }
-});
 
 export default function PlaylistMaker() {
   const [selectedSongs, setSelectedSongs] = useState([]);
@@ -139,7 +126,6 @@ Suggest 3 playlists. Each should include:
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container maxWidth="md">
         <Paper
           elevation={24}
@@ -286,6 +272,5 @@ Suggest 3 playlists. Each should include:
           )}
         </Paper>
       </Container>
-      </ThemeProvider>
   );
 }

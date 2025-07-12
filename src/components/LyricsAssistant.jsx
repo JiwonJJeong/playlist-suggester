@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  ThemeProvider,
-  createTheme,
   Container,
   Box,
   Typography,
@@ -32,17 +30,6 @@ const genreOptions = [
   "R&B",
   "Electronic"
 ];
-
-const theme = createTheme({
-  palette: {
-    primary: { main: '#556cd6' },
-    secondary: { main: '#19857b' }
-  },
-  typography: {
-    h4: { fontWeight: 600 },
-    h5: { fontWeight: 500 }
-  }
-});
 
 export default function LyricsAssistant() {
   const [lyrics, setLyrics] = useState("");
@@ -143,7 +130,6 @@ export default function LyricsAssistant() {
   );
 
   return (
-    <ThemeProvider theme={theme}>
         <Container maxWidth="md">
           <Paper
             elevation={8}
@@ -206,15 +192,18 @@ export default function LyricsAssistant() {
                     },
                   },
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#44465a",
+                    borderColor: "#44465a", //good
                     transition: "border-color 0.2s ease",
                   },
                   "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                      borderColor: "#4350E0", 
+                    },
                     "&:hover .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#6366f1",
                     },
                     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#8e54e9",
+                      borderColor: "#8e54e9", //good
                       borderWidth: "2px",
                     },
                   },
@@ -369,6 +358,5 @@ export default function LyricsAssistant() {
             )}
           </Paper>
         </Container>
-    </ThemeProvider>
   );
 }
