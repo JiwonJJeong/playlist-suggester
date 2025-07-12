@@ -1,3 +1,5 @@
+import "../styles/DiskReceiver.css"
+
 export default function DiskReceiver(){
     function handleDrop(e){
         const data = e.dataTransfer.getData("text/plain");

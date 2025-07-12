@@ -1,6 +1,6 @@
 import DiskReceiver from "./DiskReceiver.jsx"
 import Disk from "./Disk.jsx"
-import './App.css'
+import '../styles/App.css'
 
 function App() {
 

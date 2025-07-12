@@ -1,4 +1,4 @@
-/*import "./Disk.css"*/
+import "../styles/Disk.css"
 
 export default function Disk({inputText}){
     function handleDragStart(e){
