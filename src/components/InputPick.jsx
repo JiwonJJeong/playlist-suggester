@@ -2,23 +2,71 @@ import {
     alpha,
     Autocomplete,
     TextField,
+    createFilterOptions
 } from "@mui/material";
 
+const filter = createFilterOptions();
 
 export default function InputPick({options,selected,setValue, labelText}){
-    
+    const optionsObj = options.map((option)=> ({title: option}))
 
     return (
         <Autocomplete
         multiple
-        options= {options}
         value={selected}
-        onChange={(_, value) => {
-            setValue(value)
-        }}
+        freeSolo
+        onChange={(event, newValue) => {
+            if (typeof newValue === 'string') {
+              setValue({
+                title: newValue,
+              });
+            } else if (newValue && newValue.inputValue) {
+              // Create a new value from the user input
+              setValue({
+                title: newValue.inputValue,
+              });
+            } else {
+              setValue(newValue);
+            }
+          }}
         handleHomeEndKeys
         selectOnFocus
-
+        filterOptions={(option, params) => {
+            const filtered = filter(option, params);
+    
+            const { inputValue } = params;
+            // Suggest the creation of a new value
+            const isExisting = option.some((opt) => inputValue === opt.title);
+            if (inputValue !== '' && !isExisting) {
+              filtered.push({
+                inputValue,
+                title: `Add "${inputValue}"`,
+              });
+            }
+    
+            return filtered;
+          }}
+        options= {optionsObj}
+        getOptionLabel={(option) => {
+            // Value selected with enter, right from the input
+            if (typeof option === 'string') {
+              return option;
+            }
+            // Add "xxx" option created dynamically
+            if (option.inputValue) {
+              return option.inputValue;
+            }
+            // Regular option
+            return option.title;
+          }}
+          renderOption={(props, option) => {
+            const { key, ...optionProps } = props;
+            return (
+              <li key={key} {...optionProps}>
+                {option.title}
+              </li>
+            );
+          }}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -46,6 +94,7 @@ export default function InputPick({options,selected,setValue, labelText}){
               "& .MuiChip-root": {
                 backgroundColor: "#8e54e9",
                 color: "white",
+                fontSize: "1.00rem"
               },
             }}
           />
