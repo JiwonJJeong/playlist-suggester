@@ -14,40 +14,46 @@ import {
 } from "@mui/material";
 
 const songOptions = [
-  "Blinding Lights",
-  "Perfect",
-  "Shape of You",
-  "Let Her Go",
-  "Tum Hi Ho",
   "Bad Guy",
-  "Photograph",
+  "Blinding Lights",
   "Counting Stars",
-  "Levitating",
   "Kesariya",
+  "Let Her Go",
+  "Levitating",
+  "Perfect",
+  "Photograph",
+  "Shape of You",
+  "Tum Hi Ho",
 ];
 
 const singerOptions = [
-  "Taylor Swift",
-  "The Weeknd",
+  "Adele",
   "Arijit Singh",
   "Billie Eilish",
+  "Coldplay",
+  "Doja Cat",
   "Drake",
   "Ed Sheeran",
   "Shreya Ghoshal",
-  "Doja Cat",
-  "Adele",
-  "Coldplay",
+  "Taylor Swift",
+  "The Weeknd",
 ];
 
 const genreOptions = [
-  "Pop",
-  "Rock",
+  "Classical",
+  "Country",
+  "Electronic",
   "Hip Hop",
+  "Jazz",
+  "Pop",
   "R&B",
-  "Electronic"
+  "Rock",
 ];
 
 const decadeOptions = [
+  "1930s",
+  "1940s",
+  "1950s",
   "1960s",
   "1970s",
   "1980s",
@@ -158,7 +164,7 @@ Suggest 3 playlists. Each should include:
           <InputPick labelText="Favorite Song" options={songOptions} value={selectedSongs} setValue={setSelectedSongs}/>
           <InputPick labelText="Favorite Singer" options={singerOptions} value={selectedSingers} setValue={setSelectedSingers}/>
           <InputPick labelText="Favorite Genre" options={genreOptions} value={selectedGenre} setValue={setSelectedGenre}/>
-          <InputPick labelText="Favorite Decade" options={decadeOptions} value={selectedDecades} setValue={setSelectedDecades}/>
+          <InputPick labelText="Favorite Music Year" options={decadeOptions} value={selectedDecades} setValue={setSelectedDecades}/>
 
           <Box sx={{ textAlign: "center", mb: 5 }}>
             <Button
