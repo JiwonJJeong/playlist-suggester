@@ -80,10 +80,10 @@ export default function PlaylistMaker() {
     setLoading(true);
     setPlaylists([]);
 
-    const songsText = selectedSongs.join(", ");
-    const singersText = selectedSingers.join(", ");
-    const genresText = selectedGenre.join(", ");
-    const decadesText = selectedDecades.join(", ");
+    const songsText = selectedSongs.map(s => s?.title).filter(Boolean).join(", ");
+    const singersText = selectedSingers.map(s => s?.title).filter(Boolean).join(", ");;
+    const genresText = selectedGenre.map(s => s?.title).filter(Boolean).join(", ");;
+    const decadesText = selectedDecades.map(s => s?.title).filter(Boolean).join(", ");;
     const prompt = `
 ${songsText !== "" ? "Their favorite songs include " + songsText: ""}
 ${singersText !=="" ? "Their favorite singers include " + singersText: ""}
