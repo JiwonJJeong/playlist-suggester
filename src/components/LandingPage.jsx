@@ -1,5 +1,4 @@
 import Features from "./AppBar.jsx";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
 import styles from "../styles/LandingPage.module.css";
 import bgImage from "../assets/headphones.jpg"
 

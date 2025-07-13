@@ -7,10 +7,7 @@ import {
   CircularProgress,
   Paper,
   Divider,
-  Autocomplete,
-  TextField,
   Container,
-  alpha,
 } from "@mui/material";
 
 const songOptions = [
