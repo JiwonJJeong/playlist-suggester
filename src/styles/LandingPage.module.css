@@ -1,0 +1,28 @@
+@import url("clash-display.css");
+
+.gradientHeading {
+    font-family: ClashDisplay-Bold, Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: 120px; /* adjust as needed */
+    background: linear-gradient(270deg, #e91e63, #1976d2, #00e676, #e91e63);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: animatedGradient 8s ease-in-out infinite;
+    text-align: left;
+    letter-spacing: 2px;
+  }
+  
+  @keyframes animatedGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

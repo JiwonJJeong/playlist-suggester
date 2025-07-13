@@ -1,5 +1,6 @@
 import Features from "./AppBar.jsx";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
+import styles from "../styles/LandingPage.module.css"
 
 export default function LandingPage() {
   const featureData = [
@@ -27,5 +28,10 @@ export default function LandingPage() {
     },
   ];
 
-  return <Features content={featureData} />;
+  return (
+    <>
+      <h1 className={styles.gradientHeading}>Music Machine</h1>
+      <Features content={featureData} />
+    </>
+  );
 }
