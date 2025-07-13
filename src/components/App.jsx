@@ -20,23 +20,26 @@ function App() {
 
   return (
     <div className="app-container">
-      <nav className="nav-container">
+      <nav className="nav-container" role="navigation">
         <div className="nav-content">
         <Link 
             to="/" 
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            aria-label="See Features"
           >
             🏠 See Features
           </Link>
           <Link 
             to="/playlist" 
             className={`nav-link ${location.pathname === '/playlist' ? 'active' : ''}`}
+            aria-label="Find Music"
           >
             🎵 Find Music
           </Link>
           <Link 
             to="/validate" 
             className={`nav-link ${location.pathname === '/validate' ? 'active' : ''}`}
+            aria-label="Inspire Music"
           >
             ✨ Inspire Music
           </Link>

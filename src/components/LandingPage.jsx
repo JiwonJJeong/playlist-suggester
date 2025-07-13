@@ -8,6 +8,7 @@ export default function LandingPage() {
     {
       title: "🎵 Find Music",
       titlealt: "Playlist Maker",
+      arialabel: "Find Music",
       content: [
         {
           id: 1,
@@ -25,6 +26,7 @@ export default function LandingPage() {
     {
       title: "✨ Inspire Music",
       titlealt: "Lyrics Suggester",
+      arialabel: "Inspire Music",
       content: [
         { id: 1, text: "Write and get inspiriation for all your song lyrics!" },
         {

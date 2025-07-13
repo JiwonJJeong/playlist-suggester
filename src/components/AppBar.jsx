@@ -33,6 +33,10 @@ export default function Features({ content }) {
           >
             <AccordionSummary
               className={`${styles.summary}`}
+              id={`accordion-summary-${featureObj.title}`}
+              aria-controls={`accordion-content-${featureObj.title}`}
+              aria-expanded={featureObj.title == idExpanded}
+              aria-label={featureObj.arialabel}
               sx={{
                 transition: "color 0.3s ease", // Smooth transition for text color
                 "&:hover": {
@@ -72,13 +76,19 @@ export default function Features({ content }) {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <ul className={styles.featuresList}>
-                {featureObj.content.map((feat) => (
-                  <li key={feat.id} className={styles.featureItem}>
-                    {feat.text}
-                  </li>
-                ))}
-              </ul>
+              <div
+                id={`accordion-content-${featureObj.title}`}
+                aria-labelledby={`accordion-summary-${featureObj.title}`}
+                role="region"
+              >
+                <ul className={styles.featuresList}>
+                  {featureObj.content.map((feat) => (
+                    <li key={feat.id} className={styles.featureItem}>
+                      {feat.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </AccordionDetails>
           </Accordion>
         );
