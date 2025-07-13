@@ -28,10 +28,6 @@ export default function LandingPage() {
       content: [
         { id: 1, text: "Write and get inspiriation for all your song lyrics!" },
         {
-          id: 2,
-          text: "Get suggestions on technical and emotional improvements.",
-        },
-        {
           id: 3,
           text: "Got a mood in mind?: We'll listen and create the emotions together.",
         },
@@ -56,7 +52,7 @@ export default function LandingPage() {
             backgroundPosition: "left bottom",   
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            marginBottom: "100px",
+            marginBottom: "50px",
           }}
       >
         <h1 className={styles.gradientHeading}>Music<br></br>Machine</h1>

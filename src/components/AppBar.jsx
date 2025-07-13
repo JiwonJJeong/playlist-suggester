@@ -32,11 +32,17 @@ export default function Features({ content }) {
             sx={{ backgroundColor: "rgba(30, 27, 75, 0.9)" }}
           >
             <AccordionSummary
-              className={styles.summary}
-              expandIcon={content.link}
+              className={`${styles.summary}`}
+              sx={{
+                transition: "color 0.3s ease", // Smooth transition for text color
+                "&:hover": {
+                  color: "lightpink", // Change text color to light pink on hover
+                  cursor: "pointer",
+                },
+              }}
             >
               {/* Main title as link, moving right */}
-              <span className={styles.mainTitleWrapper}>
+              <Typography className={styles.mainTitleWrapper}>
                 <Link
                   className={styles.mainTitle}
                   to={featureObj.link.address}
@@ -53,7 +59,7 @@ export default function Features({ content }) {
                 >
                   {featureObj.title}
                 </Link>
-              </span>
+              </Typography>
               {/* Alt title only visible when open */}
               <Typography
                 id={featureObj.titlealt}

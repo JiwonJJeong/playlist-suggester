@@ -4,6 +4,7 @@
   min-height: 2.5em;
 }
 
+
 /* The wrapper moves the link right */
 .mainTitleWrapper {
   position: absolute;
@@ -21,32 +22,54 @@
   transform: translateX(220px); /* Adjust for your layout */
 }
 
-/* The Link styles */
 .mainTitle {
   font-weight: 700;
   font-size: 1.25rem;
   color: white !important;
   text-decoration: none;
   padding: 0.25em 0.5em;
-  border-radius: 1.5em;
-  background: transparent;
-  transition: background 0.4s, box-shadow 0.4s;
-  pointer-events: none; /* disables link when closed */
+  border-radius: 1.5em; /* Rounded corners */
+  position: relative; /* Required for pseudo-element positioning */
+  overflow: hidden; /* Ensures the pseudo-element stays within the button */
+  z-index: 1;
+  pointer-events: none; /* Disables link when closed */
   opacity: 1;
+  transition: color 0.4s, box-shadow 0.4s, transform 0.3s;
+}
+
+
+
+.mainTitle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #e630e6 0%, #1976d2 100%);
+  z-index: -1; /* Places the gradient behind the text */
+  opacity: 0; /* Start fully transparent */
+  border-radius: 1.5em; /* Match the parent's border-radius */
+  transition: opacity 1s; /* Smooth transition for the background */
 }
 
 /* Enable the link and show button background only when open */
 .open .mainTitle {
-  background: linear-gradient(90deg, #e630e6 0%, #1976d2 100%);
   color: #fff;
   box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
   pointer-events: auto;
   cursor: pointer;
-  border-radius: 1.5em;
-  padding: 0.25em 0.5em;
-  font-weight: 700;
-  font-size: 1.25rem;
-  transition: background 0.4s, box-shadow 0.4s;
+}
+
+/* Hover effect for active link */
+.open .mainTitle:hover {
+  transform: translateY(-5px) scale(1.05); 
+  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.3);
+  color: #f0f0f0; 
+}
+
+.open .mainTitle::before {
+  opacity: 1; /* Fade in the gradient */
 }
 
 /* Visually indicate disabled state */
@@ -87,8 +110,8 @@
   background: rgba(255,255,255,0.10);
   border-radius: 8px;
   margin-bottom: 0.75rem;
-  padding: 0.75rem 1rem;
-  font-size: 1.1rem;
+  padding: 0.70rem 1rem;
+  font-size: 1.0rem;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   display: flex;
