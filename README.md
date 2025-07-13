@@ -1,17 +1,18 @@
-# 🎵 Music Genie
+# 🎵 Music Machine
 
-This is a React-based web application that uses OpenAI to generate personalized music playlists based on users' favorite **songs** and **singers**. It leverages Material UI (MUI) for sleek UI components and uses OpenAI's GPT model to generate themed playlists.
+This is a React-based web application that simplifies tailoring music **playlists** and writing purposed, themed **lyrics**. It leverages Material UI for sleek UI components and uses LLMs from OpenAI, DeepSeek, and Stablity AI to generate themed playlists, lyric feedback, and images.
 
----
 
 ## Features
-
-* Select favorite **songs** and **singers** from dropdowns
+### Playlist Generator
+* Select favorite **songs**, **singers**, **genres**, and **music years** from dropdowns or **custom inputs**
 * Generate **3 personalized playlists** with catchy names, descriptions, and songs
 * Songs are **linked to YouTube** for quick listening
-* Enter the music verses **you** have written, to receive feedback + images that you can use for your album cover!
+### Lyrics Coach and Album Art Generator
+* Enter **music verses** and, optionally, mood and genre
+* Receive **feedback** + **images** that you can use for your album cover!
 
----
+
 
 ## 🛌 Tech Stack
 
@@ -24,7 +25,7 @@ This is a React-based web application that uses OpenAI to generate personalized 
 | AI Album Image Generation     | Stability-ai sdxl model             |
 | Usage of LLMs                 | Nebius Studio for access of LLMs    |
 
----
+
 
 ## 🔧 Setup Instructions
 
@@ -57,42 +58,45 @@ VITE_OPENAI_API_KEY=your_key
 
 App runs at: `http://localhost:5173`
 
----
+
+## Accessibility Development Practices
+* Accessibility checks performed using **Lighthouse** to ensure WCAG standards.
+* Focus on WAI-ARIA for better screen reader support and tab navigation.
+
 
 ## ✨ Future Improvements
 
-* Chance to upload your music performance audios/videos and we'll analyze to provide improvements + generate variations of music/song/audio you can use to produce your new songs
+* Feat: Upload your music audios/videos and we'll analyze to provide improvements + generate variations of music/song/audio
 * Spotify API integration
 * Save playlists to user profile (backend)
 * Export playlists as PDF or text
 * Share via link or QR
 * Input your written verse, and receive a quick 4-5 second short audio on how your music song could start (by using HuggingFace Audio Models)
 
----
 
 ## Attributions
-Thank you to <a href="https://pixabay.com/users/terydanphiri-364063/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Terrence Phiri</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Pixabay</a> for the headphones image.
-And to Indian Type Foundry for the beautiful Clash Display font.
+* Thank you to <a href="https://pixabay.com/users/terydanphiri-364063/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Terrence Phiri</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Pixabay</a> for the headphones image.
+* And to <a href="https://www.fontshare.com/fonts/clash-display">Indian Type Foundry</a> for the beautiful Clash Display font.
 
 ## 📝 License
 
 MIT License
 
 
-### Some verses to test
+## Some verses to test
 Falling stars and midnight skies,<br>
 You whispered truth behind the lies.<br>
 The silence screamed when you let go,<br>
 Now I dance with your shadow.
 
---- 
+___
 
 City lights flicker on my skin,<br>
 Running wild where dreams begin.<br>
 Radio static, a voice unknown,<br>
 I built my world with broken tones.
 
----
+___
 
 Wake me up with your neon glow,<br>
 Heartbeat syncing to the show.<br>
