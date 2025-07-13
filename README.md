@@ -66,12 +66,12 @@ App runs at: `http://localhost:5173`
 
 ## ✨ Future Improvements
 
-* Feat: Upload your music audios/videos and we'll analyze to provide improvements + generate variations of music/song/audio
+* Analyze uploaded video/audio to provide improvements + generate variations of music
 * Spotify API integration
 * Save playlists to user profile (backend)
 * Export playlists as PDF or text
-* Share via link or QR
-* Input your written verse, and receive a quick 4-5 second short audio on how your music song could start (by using HuggingFace Audio Models)
+* Share playlists and images via link or QR
+* Generate quick 4-5 second audio on potential starts from lyrics (by using HuggingFace Audio Models)
 
 
 ## Attributions
