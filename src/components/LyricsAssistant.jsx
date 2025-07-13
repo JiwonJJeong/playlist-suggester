@@ -228,7 +228,7 @@ export default function LyricsAssistant() {
               <TextField
                 label="Describe mood"
                 multiline
-                rows={2}
+                rows={1}
                 fullWidth
                 value={mood}
                 onChange={(e) => setMood(e.target.value)}
