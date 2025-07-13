@@ -4,7 +4,7 @@
   font-family: ClashDisplay-Bold, Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 120px;
-  background: linear-gradient(270deg, #00bfff, #00ff7f,#daff09);
+  background: linear-gradient(270deg, #00bfff, #00ff7f, #daff09);
   background-size: 800% 800%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -17,16 +17,37 @@
   padding: 50px;
   margin-left: 50px;
   line-height: 70%;
+}
+.featureHeading {
+  font-size: 1.5rem; /* Slightly smaller font size */
+  font-weight: bold; /* Keep it bold */
+  text-align: center; /* Center-align the text */
+  margin: 10px 0; /* Reduce spacing above and below */
+  color: #4a90e2; /* Use a visually appealing color */
+  text-transform: uppercase; /* Optional: Make the text uppercase */
+  letter-spacing: 1px; /* Slightly reduce letter spacing */
+  position: relative; /* For decorative underline */
+  line-height: 1.2; /* Compact line height */
+}
+
+.featureHeading::after {
+  content: "";
+  display: block;
+  width: 40%; /* Slightly narrower underline */
+  height: 2px; /* Thinner underline */
+  background: linear-gradient(to right, #4a90e2, #50e3c2); /* Gradient underline */
+  margin: 5px auto 0; /* Reduce spacing below the underline */
+  border-radius: 1px; /* Slightly rounded edges */
+}
+
+@keyframes animatedGradient {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  @keyframes animatedGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}

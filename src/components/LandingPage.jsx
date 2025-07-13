@@ -53,11 +53,12 @@ export default function LandingPage() {
             backgroundPosition: "left bottom",   
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            marginBottom: "50px",
+            marginBottom: "10px",
           }}
       >
         <h1 className={styles.gradientHeading}>Music<br></br>Machine</h1>
       </div>
+      <h2 className={styles.featureHeading}>Explore Features</h2>
       <Features content={featureData} />
     </>
   );
