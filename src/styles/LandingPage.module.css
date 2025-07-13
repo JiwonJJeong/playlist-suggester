@@ -1,18 +1,22 @@
 @import url("clash-display.css");
 
 .gradientHeading {
-    font-family: ClashDisplay-Bold, Arial, Helvetica, sans-serif;
-    font-weight: 900;
-    font-size: 120px; /* adjust as needed */
-    background: linear-gradient(270deg, #e91e63, #1976d2, #00e676, #e91e63);
-    background-size: 800% 800%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    animation: animatedGradient 8s ease-in-out infinite;
-    text-align: left;
-    letter-spacing: 2px;
+  font-family: ClashDisplay-Bold, Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: 120px;
+  background: linear-gradient(270deg, #00bfff, #00ff7f,#daff09);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: animatedGradient 8s ease-in-out infinite;
+  text-align: left;
+  letter-spacing: 2px;
+  margin-top: 30px;
+  padding: 50px;
+  margin-left: 50px;
+  line-height: 70%;
   }
   
   @keyframes animatedGradient {

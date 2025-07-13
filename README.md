@@ -70,6 +70,10 @@ App runs at: `http://localhost:5173`
 
 ---
 
+## Attributions
+Thank you to <a href="https://pixabay.com/users/terydanphiri-364063/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Terrence Phiri</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Pixabay</a> for the headphones image.
+And to Indian Type Foundry for the beautiful Clash Display font.
+
 ## 📝 License
 
 MIT License
