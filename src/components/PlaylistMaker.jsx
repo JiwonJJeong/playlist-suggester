@@ -148,6 +148,7 @@ Suggest 3 playlists. Each should include:
             variant="h3"
             gutterBottom
             align="center"
+            aria-label="Playlist Generator"
             sx={{
               color: "#fff",
               fontWeight: 700,
@@ -169,6 +170,7 @@ Suggest 3 playlists. Each should include:
           <Box sx={{ textAlign: "center", mb: 5 }}>
             <Button
               onClick={generatePlaylists}
+              aria-label="Generate Playlists"
               variant="contained"
               disabled={loading || (selectedSongs.length ==0 && selectedSingers.length ==0
                 && selectedGenre.length ==0 && selectedDecades.length ==0)}

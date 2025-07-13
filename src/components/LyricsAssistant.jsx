@@ -154,6 +154,7 @@ export default function LyricsAssistant() {
             variant="h3"
             gutterBottom
             align="center"
+            aria-label="Lyrics Coach and Album Art Generator"
             sx={{
               color: "#fff",
               fontWeight: 700,
