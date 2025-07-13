@@ -41,83 +41,120 @@ export default function LyricsAssistant() {
   const BASE = "https://api.studio.nebius.com/v1";
 
   const runAll = async () => {
-    if (!lyrics.trim()) return;
-    let moodContentToAi = "";
-    let genreContentToAi = "";
-    let evalMetrics = "rhyme & meter, imagery, and authenticity & emotion"
-    if (genre.length!=0) {
-      genreContentToAi=`The intended genre(s) is ${genre.join(", ")}`
-      evalMetrics = "suitability to genre, " + evalMetrics;
-    };
-    if (mood.trim()) {
-      moodContentToAi=`The intended mood or theme is ${mood.trim()}`
-      evalMetrics = "clarity of mood, " + evalMetrics;
-    };
-    if (!API_KEY) {
-      alert("🚨 Missing API key! Set VITE_NEBIUS_API_KEY");
-      return;
-    }
+  if (!lyrics.trim()) return;
 
-    setLoading(true);
-    setFeedback("");
-    setImages([]);
+  let moodContentToAi = "";
+  let genreContentToAi = "";
+  let evalMetrics = "rhyme & meter, imagery, and authenticity & emotion";
 
-    try {
-      // Chat/Feedback
-      const chatRes = await fetch(`${BASE}/chat/completions`, {
+  // ✅ Safely convert genre array (which may be strings or objects) to strings
+  const genreNames = genre.map((g) => {
+    if (typeof g === "string") return g;
+    if (typeof g === "object") return g.value || g.label || JSON.stringify(g);
+    return String(g);
+  });
+
+  if (genreNames.length !== 0) {
+    genreContentToAi = `The intended genre(s) is ${genreNames.join(", ")}`;
+    evalMetrics = "suitability to genre, " + evalMetrics;
+  }
+
+  if (mood.trim()) {
+    moodContentToAi = `The intended mood or theme is ${mood.trim()}`;
+    evalMetrics = "clarity of mood, " + evalMetrics;
+  }
+
+  if (!API_KEY) {
+    alert("🚨 Missing API key! Set VITE_NEBIUS_API_KEY");
+    return;
+  }
+
+  setLoading(true);
+  setFeedback("");
+  setImages([]);
+
+  try {
+    // 🎤 Chat/Feedback request
+    const chatRes = await fetch(`${BASE}/chat/completions`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "deepseek-ai/DeepSeek-V3",
+        messages: [
+          {
+            role: "system",
+            content: `You are a songwriting coach. ${moodContentToAi}. ${genreContentToAi}. Evaluate these lyrics for ${evalMetrics} and suggest 3 concrete next steps. Then append a one-sentence prompt for an album-cover image based on this song. --- ${lyrics.trim()}`
+          }
+        ]
+      })
+    });
+
+    if (!chatRes.ok) throw new Error(`Chat failed ${chatRes.status}`);
+    const chatJson = await chatRes.json();
+    const reply = chatJson.choices?.[0]?.message?.content?.trim() || "";
+    setFeedback(reply);
+
+    // 🎨 Extract image prompt from feedback
+    const sentences = reply
+      .replace(/\n/g, " ")
+      .split(/(?<=[.!?])\s+/)
+      .slice(0, 2)
+      .join(" ");
+    const promptText = `Album cover art reflecting: ${sentences}`;
+
+    // 🖼️ Generate 5 images
+    const fetches = Array.from({ length: 5 }).map(() =>
+      fetch(`${BASE}/images/generations`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "deepseek-ai/DeepSeek-V3",
-          messages: [
-            {
-              role: "system",
-              content: `You are a songwriting coach. ${moodContentToAi}. ${genreContentToAi}. Evaluate these lyrics for ${evalMetrics} and suggest 3 concrete next steps. Then append a one-sentence prompt for an album-cover image based on this song. --- ${lyrics.trim()}`
-            }
-          ]
-        })
-      });
-      if (!chatRes.ok) throw new Error(`Chat failed ${chatRes.status}`);
-      const chatJson = await chatRes.json();
-      const reply = chatJson.choices?.[0]?.message?.content?.trim() || "";
-      setFeedback(reply);
+          model: "stability-ai/sdxl",
+          prompt: promptText,
+          n: 1,
+          size: "512x512",
+        }),
+      }).then(async (res) => {
+        if (!res.ok) {
+          const txt = await res.text();
+          throw new Error(`Image gen failed ${res.status}: ${txt}`);
+        }
+        const { data } = await res.json();
+        return data[0]?.url;
+      })
+    );
 
-      // Derive prompt from feedback
-      const sentences = reply.replace(/\n/g, " ")
-                             .split(/(?<=[.!?])\s+/)
-                             .slice(0, 2)
-                             .join(" ");
-      const promptText = `Album cover art reflecting: ${sentences}`;
+    const urls = (await Promise.all(fetches)).filter(Boolean);
+    setImages(urls);
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong. See console.");
+  } finally {
+    setLoading(false);
+  }
+};
 
-      // Image generation
-      const fetches = Array.from({ length: 5 }).map(() =>
-        fetch(`${BASE}/images/generations`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ model: "stability-ai/sdxl", prompt: promptText, n: 1, size: "512x512" })
-        }).then(async (res) => {
-          if (!res.ok) {
-            const txt = await res.text();
-            throw new Error(`Image gen failed ${res.status}: ${txt}`);
-          }
-          const { data } = await res.json();
-          return data[0]?.url;
-        })
-      );
 
-      const urls = (await Promise.all(fetches)).filter(Boolean);
-      setImages(urls);
+  // Add this function inside LyricsAssistant component
+  const downloadImage = async (url) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `album-art-${Date.now()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
     } catch (err) {
+      alert("Failed to download image.");
       console.error(err);
-      alert("Something went wrong. See console.");
-    } finally {
-      setLoading(false);
     }
   };
 
