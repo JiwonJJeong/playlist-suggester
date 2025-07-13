@@ -11,14 +11,14 @@ export default function LandingPage() {
       content: [
         {
           id: 1,
-          text: "Find songs based on other songs, artists, genre, and time period",
+          text: "Find songs based on other songs, artists, genre, and time period.",
         },
-        { id: 2, text: "Want a mix?: Add more than one for each category!" },
+        { id: 2, text: "Want a mix? Add many in each category!" },
         {
           id: 3,
-          text: "Don't care about genre?: You can leave any category empty as you'd like!",
+          text: "Don't care about genre? No problem, only one input needed!",
         },
-        { id: 4, text: "Immediately listen to your next playlist!" },
+        { id: 4, text: "What about Mongolian throat singing? Customize your inputs!" },
       ],
       link: { address: "/playlist", text: "🎵 Find Music" },
     },
@@ -29,13 +29,13 @@ export default function LandingPage() {
         { id: 1, text: "Write and get inspiriation for all your song lyrics!" },
         {
           id: 3,
-          text: "Got a mood in mind?: We'll listen and create the emotions together.",
+          text: "Got a mood in mind? Let's brainstorm together.",
         },
         {
           id: 4,
-          text: "Need rhymes for rap?: Fit your lyrics to genre's style",
+          text: "Need rhymes for rap? Fit the genre!",
         },
-        { id: 5, text: "Immediately listen to your next playlist!" },
+        { id: 5, text: "Browse related images to keep the writing going!" },
       ],
       link: { address: "/validate", text: "✨ Inspire Music" },
     },
