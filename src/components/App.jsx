@@ -22,9 +22,15 @@ function App() {
     <div className="app-container">
       <nav className="nav-container">
         <div className="nav-content">
+        <Link 
+            to="/" 
+            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+          >
+            🏠 See Features
+          </Link>
           <Link 
             to="/playlist" 
-            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            className={`nav-link ${location.pathname === '/playlist' ? 'active' : ''}`}
           >
             🎵 Find Music
           </Link>
