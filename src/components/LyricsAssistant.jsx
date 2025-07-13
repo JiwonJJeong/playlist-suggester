@@ -48,18 +48,14 @@ export default function LyricsAssistant() {
   let evalMetrics = "rhyme & meter, imagery, and authenticity & emotion";
 
   // ✅ Safely convert genre array (which may be strings or objects) to strings
-  const genreNames = genre.map((g) => {
-    if (typeof g === "string") return g;
-    if (typeof g === "object") return g.value || g.label || JSON.stringify(g);
-    return String(g);
-  });
+  const genreNames = genre.map(s => s?.title).filter(Boolean).join(", ");
 
   if (genreNames.length !== 0) {
-    genreContentToAi = `The intended genre(s) is ${genreNames.join(", ")}`;
+    genreContentToAi = `The intended genre(s) is ${genreNames}`;
     evalMetrics = "suitability to genre, " + evalMetrics;
   }
 
-  if (mood.trim()) {
+  if (mood.trim().length !== 0) {
     moodContentToAi = `The intended mood or theme is ${mood.trim()}`;
     evalMetrics = "clarity of mood, " + evalMetrics;
   }
