@@ -11,7 +11,7 @@ This is a React-based web application that simplifies tailoring music **playlist
 ### Lyrics Coach and Album Art Generator
 * Enter **music verses** and, optionally, mood and genre
 * Receive **feedback** + **images** that you can use for your album cover!
-
+### Demo Video
 [![Watch the Demo](https://img.youtube.com/vi/NKFyyhlFCu4/hqdefault.jpg)](https://www.youtube.com/watch?v=NKFyyhlFCu4)
 
 
