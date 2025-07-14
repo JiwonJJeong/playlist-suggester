@@ -71,6 +71,7 @@ App runs at: `http://localhost:5173`
 ## ✨ Future Improvements
 
 * Analyze uploaded video/audio to provide improvements + generate variations of music
+* Improve UI of output responses
 * Spotify API integration
 * Save playlists to user profile (backend)
 * Export playlists as PDF or text
