@@ -2,6 +2,11 @@
 
 This is a React-based web application that simplifies tailoring music **playlists** and writing purposed, themed **lyrics**. It leverages Material UI for sleek UI components and uses LLMs from OpenAI, DeepSeek, and Stablity AI to generate themed playlists, lyric feedback, and images.
 
+## Live Demo
+
+[**Try the live demo here!**](https://playlist-suggester.vercel.app)
+
+> ⚠️ **Note**: This demo shows the UI only. API functionality (LLM responses) is disabled because the required API key is not included for security reasons.
 
 ## Features
 ### Playlist Generator
@@ -16,7 +21,7 @@ This is a React-based web application that simplifies tailoring music **playlist
 
 
 
-## 🛌 Tech Stack
+## Tech Stack
 
 | Feature                       | Technology Used                     |
 | ----------------------------- | ----------------------------------- |
@@ -26,10 +31,11 @@ This is a React-based web application that simplifies tailoring music **playlist
 | AI Feedback Generation        | DeepSeek-V3 model                   |
 | AI Album Image Generation     | Stability-ai sdxl model             |
 | Usage of LLMs                 | Nebius Studio for access of LLMs    |
+| Deployment and Hosting        | Vercel                              |
 
 
 
-## 🔧 Setup Instructions
+## Setup Instructions
 
 1. **Clone the repo**
 
@@ -68,7 +74,7 @@ App runs at: `http://localhost:5173`
 > Learn more about how challenges including accessibility shaped our vision in our [DevPost blog](https://devpost.com/software/music-genie-cmjr5e).
 
 
-## ✨ Future Improvements
+## Future Improvements
 
 * Analyze uploaded video/audio to provide improvements + generate variations of music
 * Improve formatting and style of output responses
@@ -83,7 +89,7 @@ App runs at: `http://localhost:5173`
 * Thank you to <a href="https://pixabay.com/users/terydanphiri-364063/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Terrence Phiri</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7276511">Pixabay</a> for the headphones image.
 * And to <a href="https://www.fontshare.com/fonts/clash-display">Indian Type Foundry</a> for the beautiful Clash Display font.
 
-## 📝 License
+## License
 
 MIT License
 
