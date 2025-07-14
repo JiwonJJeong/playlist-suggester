@@ -12,6 +12,8 @@ This is a React-based web application that simplifies tailoring music **playlist
 * Enter **music verses** and, optionally, mood and genre
 * Receive **feedback** + **images** that you can use for your album cover!
 
+[![Watch the Demo](https://img.youtube.com/vi/NKFyyhlFCu4/hqdefault.jpg)](https://www.youtube.com/watch?v=NKFyyhlFCu4)
+
 
 
 ## 🛌 Tech Stack
@@ -62,6 +64,8 @@ App runs at: `http://localhost:5173`
 ## Accessibility Development Practices
 * Accessibility checks performed using **Lighthouse** to ensure WCAG standards.
 * Focus on WAI-ARIA for better screen reader support and tab navigation.
+
+> Learn more about how challenges including accessibility shaped our vision in our [DevPost blog](https://devpost.com/software/music-genie-cmjr5e).
 
 
 ## ✨ Future Improvements
